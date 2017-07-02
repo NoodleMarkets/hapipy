@@ -1,7 +1,7 @@
 from collections import defaultdict
 import unittest2
 import simplejson as json
-from StringIO import StringIO
+from io import StringIO
 from gzip import GzipFile
 
 from hapi.base import BaseClient
@@ -15,7 +15,7 @@ class TestBaseClient(BaseClient):
 
 class TestResult(object):
     def __init__(self, *args, **kwargs):
-        for k, v in kwargs.items():
+        for k, v in list(kwargs.items()):
             setattr(self, k, v)
 
     def getheaders(self):
@@ -46,7 +46,7 @@ class BaseTest(unittest2.TestCase):
         # so duplicate=key&duplicate=value
         doseq = True
         url, headers, data = self.client._prepare_request(subpath, params, data, opts, doseq)
-        print url
+        print(url)
         self.assertTrue('duplicate=key&duplicate=' in url)
         
     def test_call(self):

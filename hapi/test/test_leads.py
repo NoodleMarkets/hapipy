@@ -1,7 +1,7 @@
 import unittest2
-import helper
+from . import helper
 from hapi.leads import LeadsClient
-import logger
+from . import logger
 import time
 
 class LeadsClientTest(unittest2.TestCase):
